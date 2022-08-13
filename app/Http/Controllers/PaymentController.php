@@ -382,7 +382,7 @@ class PaymentController extends Controller
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->stream('vista-pdf', "$paymentpdf.pdf");
+        return $pdf->download('$paymentpdf.pdf');
         //return $pdf->download("$invoicepdf.pdf");
     }
 

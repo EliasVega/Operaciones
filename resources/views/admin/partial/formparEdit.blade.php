@@ -36,21 +36,21 @@
 
 
 
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="box-danger">
             <label class="form-control-label">
                 <h4>Agregar Entrega Parcial o total</h4>
             </label>
         </div>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
         <div class="form-group"  id="pend">
             <label for="operating">Cantidad max</label>
             <input type="number" name="operating" id="operating"
                 class="form-control" placeholder="cantidad" readonly>
         </div>
     </div>
-
+    <div class="clearfix"></div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
         <div class="form-group row">
             <label class="form-control-label" for="operation_id">Operacion</label>

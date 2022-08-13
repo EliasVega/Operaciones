@@ -59,42 +59,42 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('remission.index') }}"><button><img src="{{ asset('/img/remision.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Ordenes de Produccion" /></button></a>
+            <a href="{{ route('remission.index') }}"><button><img src="{{ asset('/img/op.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Ordenes de Produccion" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('partial.index') }}"><button><img src="{{ asset('/img/recibido.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Entregas" /></button></a>
+            <a href="{{ route('partial.index') }}"><button><img src="{{ asset('/img/recp.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Entregas" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('operation.index') }}"><button><img src="{{ asset('/img/proceso.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="En Produccion" /></button></a>
+            <a href="{{ route('operation.index') }}"><button><img src="{{ asset('/img/proc.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="En Produccion" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('operating.index') }}"><button><img src="{{ asset('/img/produccion.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Operarios Produciendo" /></button></a>
+            <a href="{{ route('operating.index') }}"><button><img src="{{ asset('/img/prod.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Operarios Produciendo" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('payment.index') }}"><button><img src="{{ asset('/img/pagos.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Pagos" /></button></a>
+            <a href="{{ route('payment.index') }}"><button><img src="{{ asset('/img/pag.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Pagos" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('advance.index') }}"><button><img src="{{ asset('/img/advance.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Avances" /></button></a>
+            <a href="{{ route('advance.index') }}"><button><img src="{{ asset('/img/adv.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Avances" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('presuntive.index') }}"><button><img src="{{ asset('/img/pagop.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Pago Presuntivo" /></button></a>
+            <a href="{{ route('presuntive.index') }}"><button><img src="{{ asset('/img/pagp.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Pago Presuntivo" /></button></a>
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
         <div>
-            <a href="{{ route('increment.create') }}"><button><img src="{{ asset('/img/increment.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Incremento" /></button></a>
+            <a href="{{ route('increment.create') }}"><button><img src="{{ asset('/img/inc.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Incremento" /></button></a>
         </div>
     </div>
 

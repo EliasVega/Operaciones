@@ -219,12 +219,12 @@ class PartialController extends Controller
         ->where('com.id', '=', 1)
         ->first();
 
-        $partial = Partial::from('partials AS par')
+        $partials = Partial::from('partials AS par')
         ->join('users as use', 'par.user_id', 'use.id')
         ->join('remissions as rem', 'par.remission_id', 'rem.id')
         ->join('users as user', 'rem.user_id', 'user.id')
         ->select('par.id', 'par.total', 'par.created_at', 'use.name', 'user.name as nameO', 'user.number', 'user.address', 'user.email', 'user.phone')
-        ->where('rem.id', '=', $id)->first();
+        ->where('par.id', '=', $id)->first();
 
         /*mostrar detalles*/
         $operatingPartials = OperatingPartial::from('operating_partials AS op')
@@ -235,7 +235,7 @@ class PartialController extends Controller
         ->where('op.partial_id', '=', $id)
         ->get();
 
-        $partialpdf = "EP-". $partial->id;
+        $partialpdf = "EP-". $partials->id;
         $logo = './imagenes/logos'.$company->logo;
         $view = \view('admin.partial.pdf', compact('partials', 'operatingPartials', 'company', 'logo'))->render();
         $pdf = \App::make('dompdf.wrapper');

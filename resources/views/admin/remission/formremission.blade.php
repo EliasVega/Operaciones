@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="form-group row">
             <label class="form-control-label" for="operation_id">Operacion</label>
             <select name="operation_id" class="form-control selectpicker" id="operation_id"
@@ -32,30 +32,38 @@
             </select>
         </div>
     </div>
-    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
         <div class="form-group">
             <label class="form-control-label" for="price">Precio</label>
             <input type="number" id="price" name="price" class="form-control"
                 placeholder="Precio" min="1" pattern="[0-9]{0,15}">
         </div>
     </div>
-    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
         <div class="form-group">
             <label class="form-control-label" for="quantity">Cantidad</label>
             <input type="number" id="quantity" name="quantity" value=""
                 class="form-control" placeholder="Cantidad" min="1" pattern="[0-9]{0,15}">
         </div>
     </div>
-    <div class="col-lg-2 col-md-3 col-sm-2 col-xs-12">
-        <div class="form-group">
-            <label class="form-control-label">Add</label><br>
-            <button class="btn btn-grisb" type="button" id="add" data-toggle="tooltip" data-placement="top" title="Add"><i class="fas fa-check"></i>&nbsp; </button>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-3 col-sm-2 col-xs-12">
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
         <div class="form-group">
             <label class="form-control-label" >Canc</label><br>
             <a href="{{url('remission')}}" class="btn btn-grisb" data-toggle="tooltip" data-placement="top" title="Cancelar"><i class="fa fa-window-close"></i>&nbsp; </a>
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+        <div class="form-group">
+            <label class="form-control-label" for="observation">Observacion</label>
+            <input type="text" id="observation" name="observation" value=""
+                class="form-control" placeholder="Observacion" min="1" pattern="[0-9]{0,15}">
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+        <div class="form-group">
+            <label class="form-control-label">Add</label><br>
+            <button class="btn btn-grisb" type="button" id="add" data-toggle="tooltip" data-placement="top" title="Add"><i class="fas fa-check"></i>&nbsp; </button>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -65,15 +73,16 @@
                     <tr>
                         <th>Eliminar</th>
                         <th>Id</th>
-                        <th>operacion</th>
+                        <th>Operacion</th>
+                        <th>Observacion</th>
                         <th>Cantidad</th>
-                        <th>precio ($)</th>
+                        <th>Precio ($)</th>
                         <th>SubTotal ($)</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="footder">TOTAL:</th>
+                        <th colspan="6" class="footder">TOTAL:</th>
                         <td class="footder"><strong id="total_html">$ 0.00</strong>
                             <input type="hidden" name="total" id="total"></td>
                     </tr>

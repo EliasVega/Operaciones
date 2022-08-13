@@ -28,6 +28,7 @@ class UpdateOperationRemissionRequest extends FormRequest
             'price'        => '',
             'subtotal'     => '',
             'item'         => '',
+            'observation'  => '',
             'pending'      => '',
             'operation_id' => '',
             'remission_id' => ''

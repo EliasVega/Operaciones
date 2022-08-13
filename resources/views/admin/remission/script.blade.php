@@ -45,6 +45,7 @@
         operation= $("#operation_id option:selected").text();
         quantity= $("#quantity").val();
         price= $("#price").val();
+        observation= $("#observation").val();
 
 
 
@@ -53,7 +54,7 @@
             subtotal[cont]= parseFloat(quantity) * parseFloat(price);
             total= total+subtotal[cont];
 
-            var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times"></i></button></td> <td><input type="hidden" name="idP[]" value="'+operation_id+'">'+operation_id+'</td>  <td><input type="hidden" name="operation_id[]" value="'+operation_id+'">'+operation+'</td> <td><input type="hidden" id="quantity" name="quantity[]" value="'+quantity+'">'+quantity+'</td> <td><input type="hidden" id="price" name="price[]" value="'+parseFloat(price).toFixed(2)+'">'+price+'</td> <td> $'+parseFloat(subtotal[cont]).toFixed(2)+'</td></tr>';
+            var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times"></i></button></td> <td><input type="hidden" name="idP[]" value="'+operation_id+'">'+operation_id+'</td>   <td><input type="hidden" name="operation_id[]" value="'+operation_id+'">'+operation+'</td> <td><input type="hidden" name="observation[]" value="'+observation+'">'+observation+'</td> <td><input type="hidden" id="quantity" name="quantity[]" value="'+quantity+'">'+quantity+'</td> <td><input type="hidden" id="price" name="price[]" value="'+parseFloat(price).toFixed(2)+'">'+price+'</td> <td> $'+parseFloat(subtotal[cont]).toFixed(2)+'</td></tr>';
             cont++;
 
             totals();
@@ -81,6 +82,7 @@
         $("#operation_id").val("");
         $("#quantity").val("");
         $("#pricerice").val("");
+        $("#observation").val("");
 
     }
 

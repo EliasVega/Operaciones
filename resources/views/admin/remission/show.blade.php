@@ -43,7 +43,8 @@
                     <table class="table table-striped table-bordered table-condensed table-hover">
                         <thead>
                             <tr class="bg-info">
-                                <th>operacion</th>
+                                <th>Operacion</th>
+                                <th>Observacion</th>
                                 <th>Precio ($)</th>
                                 <th>Cantidad</th>
                                 <th>Subtotal</th>
@@ -52,7 +53,7 @@
                         <tfoot>
 
                             <tr>
-                                <th  colspan="3"><p align="right">TOTAL:</p></th>
+                                <th  colspan="4"><p align="right">TOTAL:</p></th>
                                 <th><p align="right">${{ $remissions->total }}</p></th>
                             </tr>
                         </tfoot>
@@ -60,6 +61,7 @@
                             @foreach($operationRemissions as $or)
                                 <tr>
                                     <td>{{ $or->name }}</td>
+                                    <td>{{ $or->observation }}</td>
                                     <td>${{ $or->price }}</td>
                                     <td>{{ $or->quantity }}</td>
                                     <td>{{ $or->subtotal }}</td>

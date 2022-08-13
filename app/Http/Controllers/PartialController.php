@@ -241,7 +241,7 @@ class PartialController extends Controller
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->stream('vista-pdf', "$partialpdf.pdf");
+        return $pdf->download('$partialpdf.pdf');
         //return $pdf->download("$invoicepdf.pdf");
     }
 

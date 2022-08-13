@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('subtotal');
             $table->integer('item');
+            $table->string('observation')->nullable();
             $table->integer('pending');
 
             $table->foreignId('operation_id')->constrained()->onUpdate('cascade');

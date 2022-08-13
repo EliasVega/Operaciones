@@ -14,6 +14,7 @@ class OperationRemission extends Model
         'price',
         'subtotal',
         'item',
+        'observation',
         'pending',
         'operation_id',
         'remission_id',

@@ -92,6 +92,7 @@ class RemissionController extends Controller
             $operation_id = $request->operation_id;
             $quantity = $request->quantity;
             $price = $request->price;
+            $observation = $request->observation;
             $responsible = Auth::user()->id;
 
             $remission = new Remission();
@@ -113,6 +114,7 @@ class RemissionController extends Controller
                 $operationRemission->price = $price[$cont];
                 $operationRemission->subtotal = $subtotal;
                 $operationRemission->item = $item;
+                $operationRemission->observation = $observation[$cont];
                 $operationRemission->pending = $quantity[$cont];
                 $operationRemission->operation_id = $operation_id[$cont];
                 $operationRemission->remission_id = $remission->id;
@@ -153,7 +155,7 @@ class RemissionController extends Controller
         ->join('operations AS ope', 'or.operation_id', '=', 'ope.id')
         ->join('remissions AS rem', 'or.remission_id', '=', 'rem.id')
         ->join('users AS use', 'rem.user_id', '=', 'use.id')
-        ->select('or.quantity', 'or.price', 'or.subtotal', 'rem.id', 'rem.total',  'ope.name', 'use.name AS nameU')
+        ->select('or.quantity', 'or.price', 'or.subtotal', 'or.observation', 'rem.id', 'rem.total',  'ope.name', 'use.name AS nameU')
         ->where('or.remission_id', '=', $id)
         ->get();
         return view('admin.remission.show', compact('remissions', 'operationRemissions'));
@@ -297,14 +299,14 @@ class RemissionController extends Controller
         ->where('or.remission_id', '=', $id)
         ->get();
 
-        $remissionpdf = "REM-". $remissions->id;
+        $remissionpdf = "OP-". $remissions->id;
         $logo = './imagenes/logos'.$company->logo;
         $view = \view('admin.remission.pdf', compact('remissions', 'operationRemissions', 'company', 'logo'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->stream('vista-pdf', "$remissionpdf.pdf");
+        return $pdf->download('$remissionpdf.pdf');
         //return $pdf->download("$invoicepdf.pdf");
     }
 

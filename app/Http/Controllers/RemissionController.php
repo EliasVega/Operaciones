@@ -354,15 +354,6 @@ class RemissionController extends Controller
             $price = $request->price;
             $responsible = Auth::user()->id;
 
-            $remission = Remission::findOrFail($id);
-            $totality = $remission->total;
-            $total = $totality -
-            $remission->user_id         = $request->user_id;
-            $remission->total           = $request->total;
-            $remission->status          = 'PROCESO';
-            $remission->responsible_id = $responsible;
-            $remission->update();
-
             $cont = 0;
 
             while($cont < count($operation_id)){
@@ -394,7 +385,6 @@ class RemissionController extends Controller
                 $operationRemission->item = $item;
                 $operationRemission->pending = $quantity[$cont];
                 $operationRemission->update();
-
 
                 $operation = Operation::findOrFail($operation_id[$cont]);
                 $stocky = $operRemis->quantity;

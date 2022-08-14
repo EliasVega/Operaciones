@@ -69,7 +69,7 @@ class UserController extends Controller
             ->join('documents AS doc', 'use.document_id', 'doc.id')
             ->join('roles AS rol', 'use.role_id', 'rol.id')
             ->select('use.id', 'use.name', 'doc.initials', 'use.number', 'use.address', 'use.phone', 'use.email', 'use.position', 'rol.role', 'use.status')
-            ->where('use.status', '=', 'INACTIVE')
+            ->where('use.status', '=', 'INACTIVO')
             ->get();
 
             return datatables()
@@ -141,10 +141,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user->status == 'ACTIVE') {
-            $user->status = 'INACTIVE';
+        if ($user->status == 'ACTIVO') {
+            $user->status = 'INACTIVO';
         } else {
-            $user->status = 'ACTIVE';
+            $user->status = 'ACTIVO';
         }
         $user->update();
 

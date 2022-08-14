@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ 'css/pdfs.css' }}">
-        <title>Remision</title>
+        <title>Orden_Operacion</title>
 
     </head>
     <header id="header">

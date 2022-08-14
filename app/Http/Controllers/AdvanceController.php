@@ -61,7 +61,9 @@ class AdvanceController extends Controller
      */
     public function create()
     {
-        $users = User::get();
+        $users = User::where('status', '=', 'ACTIVO')
+        ->where('role_id', '=', 4)
+        ->get();
         return view('admin.advance.create', compact('users'));
     }
 

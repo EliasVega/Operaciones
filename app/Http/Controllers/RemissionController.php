@@ -298,15 +298,15 @@ class RemissionController extends Controller
         ->where('or.remission_id', '=', $id)
         ->get();
 
-        $remissionpdf = "OP-". $remissions->id;
+        $remissionpdf = "OP-". $remissions->id . '.pdf';
         $logo = './imagenes/logos'.$company->logo;
         $view = \view('admin.remission.pdf', compact('remissions', 'operationRemissions', 'company', 'logo'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->download('$remissionpdf.pdf');
-        //return $pdf->download("$invoicepdf.pdf");
+        return $pdf->download($remissionpdf);
+        //return $pdf->stream("$invoicepdf.pdf");
     }
 
     /**

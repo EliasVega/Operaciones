@@ -237,14 +237,14 @@ class PartialController extends Controller
         ->where('op.partial_id', '=', $id)
         ->get();
 
-        $partialpdf = "EP-". $partials->id;
+        $partialpdf = "EP-". $partials->id . '.pdf';
         $logo = './imagenes/logos'.$company->logo;
         $view = \view('admin.partial.pdf', compact('partials', 'operatingPartials', 'company', 'logo'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->download('$partialpdf.pdf');
+        return $pdf->download($partialpdf);
         //return $pdf->download("$invoicepdf.pdf");
     }
     /**

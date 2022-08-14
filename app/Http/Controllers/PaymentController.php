@@ -375,14 +375,14 @@ class PaymentController extends Controller
         ->where('adv.payment_id', '=', $id)
         ->get();
 
-        $paymentpdf = "PAGO-". $pay->id;
+        $paymentpdf = "PAGO-". $pay->id . '.pdf';
         $logo = './imagenes/logos'.$company->logo;
         $view = \view('admin.payment.pdf', compact('payment', 'operatingPartials', 'company', 'logo', 'advances', 'advan'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         //$pdf->setPaper ( 'A7' , 'landscape' );
 
-        return $pdf->download('$paymentpdf.pdf');
+        return $pdf->download($paymentpdf);
         //return $pdf->download("$invoicepdf.pdf");
     }
 

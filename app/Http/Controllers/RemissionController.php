@@ -14,7 +14,6 @@ use App\Models\Partial;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\ElseIf_;
 
 class RemissionController extends Controller
 {
@@ -346,23 +345,19 @@ class RemissionController extends Controller
      */
     public function update(UpdateRemissionRequest $request, $id)
     {
-        $operation_id = $request->operation_id;
-        $itemnew = count($operation_id);
+
         $remission = Remission::findOrFail($id);
-        if($itemnew != $remission->items){
-            return redirect("remission")->with('warning', 'Se requiere de todos los items');
-        }
         try{
             DB::beginTransaction();
             $operation_id = $request->operation_id;
             $quantity = $request->quantity;
             $price = $request->price;
             $responsible = Auth::user()->id;
-            $itemnew = count($operation_id);
 
             $remission = Remission::findOrFail($id);
+            $totality = $remission->total;
+            $total = $totality -
             $remission->user_id         = $request->user_id;
-            $remission->items           = count($operation_id);
             $remission->total           = $request->total;
             $remission->status          = 'PROCESO';
             $remission->responsible_id = $responsible;
@@ -374,17 +369,22 @@ class RemissionController extends Controller
                 $subtotal = $quantity[$cont] * $price[$cont];
                 $item = $cont +1;
 
-                $operRemis = OperationRemission::from('operation_remissions as or')
-                ->join('operations as ope', 'or.operation_id', 'ope.id')
-                ->join('remissions as rem', 'or.remission_id', 'rem.id')
-                ->select('or.id', 'or.quantity', 'ope.price', 'ope.name', 'ope.stock')
-                ->where('or.remission_id', '=', $id)
-                ->where('or.operation_id', '=', $operation_id[$cont])
-                ->first();
+                $operRemis = OperationRemission::where('remission_id', '=', $id)->where('operation_id', '=', $operation_id[$cont])->first();
+
+                $remission = Remission::findOrFail($id);
+                $totality = $remission->total;
+                $total    = $totality - $operRemis->subtotal;
+                $remission->user_id         = $request->user_id;
+                $remission->total           = $total + $subtotal;
+                $remission->status          = 'PROCESO';
+                $remission->responsible_id = $responsible;
+                $remission->update();
+
                 $stocky = $operRemis->quantity;
                 $operation = Operation::findOrFail($operation_id[$cont]);
                 $stock = $operation->stock;
-                $operation->stock = $stock - $stocky;
+                $stock = $stock - $stocky;
+                $operation->stock = $stock + $quantity[$cont];
                 $operation->update();
 
                 $operationRemission = OperationRemission::findOrFail($operRemis->id);
@@ -397,7 +397,9 @@ class RemissionController extends Controller
 
 
                 $operation = Operation::findOrFail($operation_id[$cont]);
+                $stocky = $operRemis->quantity;
                 $stock = $operation->stock;
+                $stock = $stock - $stocky;
                 $operation->stock = $stock + $quantity[$cont];
                 $operation->update();
 

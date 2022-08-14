@@ -50,6 +50,13 @@
                 class="form-control" placeholder="cantidad" readonly>
         </div>
     </div>
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+        <div class="form-group"  id="ido">
+            <label for="idO">id Operacion</label>
+            <input type="number" name="idO" id="idO"
+                class="form-control" placeholder="idOperation" readonly>
+        </div>
+    </div>
     <div class="clearfix"></div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
         <div class="form-group row">
@@ -59,7 +66,7 @@
                 <option value="0" disabled selected>Seleccionar el Operacion</option>
                 @foreach($operatingPartials as $op)
                 <option
-                    value="{{ $op->id }}_{{ $op->price }}_{{ $op->quantity }}_{{ $op->operating }}">
+                    value="{{ $op->id }}_{{ $op->price }}_{{ $op->quantity }}_{{ $op->operating }}_{{ $op->idO }}">
                     {{ $op->name }}</option>
                 @endforeach
             </select>

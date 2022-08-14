@@ -13,6 +13,8 @@ use App\Models\OperationRemission;
 use App\Models\Remission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\SweetAlertServiceProvider;
+
 
 class PartialController extends Controller
 {
@@ -245,7 +247,6 @@ class PartialController extends Controller
         return $pdf->download('$partialpdf.pdf');
         //return $pdf->download("$invoicepdf.pdf");
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -254,9 +255,9 @@ class PartialController extends Controller
      */
     public function edit($id)
     {
-        $partials = Partial::where('id', '=', $id)->first();
+        $partial = Partial::where('id', '=', $id)->first();
 
-        if ($partials->status == 'PENDIENTE' && $partials->aprobation != 'PAGADO') {
+        if ($partial->status == 'PENDIENTE' && $partial->aprobation != 'PAGADO') {
             $partials = Partial::from('partials AS par')
             ->join('users as use', 'par.user_id', 'use.id')
             ->join('remissions as rem', 'par.remission_id', 'rem.id')
@@ -265,13 +266,12 @@ class PartialController extends Controller
             ->where('par.id', '=', $id)
             ->first();
 
-            $operatingPartials = OperatingPartial::from('operating_partials AS op')
-            ->join('operations AS ope', 'op.operation_id', '=', 'ope.id')
-            ->join('operatings AS oper', 'op.operating_id', '=', 'oper.id')
-            ->join('partials AS par', 'op.partial_id', '=', 'par.id')
-            ->join('users as use', 'par.user_id', 'use.id')
-            ->select('op.id', 'op.quantity', 'op.price', 'op.subtotal', 'op.item', 'ope.id as idO', 'oper.id as idOp', 'par.total', 'ope.name', 'use.name AS nameU', 'use.id as idO', 'oper.operating')
-            ->where('op.partial_id', '=', $id)
+            $operatingPartials = OperatingPartial::from('operating_partials as op')
+            ->join('operations as ope', 'op.operation_id', 'ope.id')
+            ->join('operatings as oper', 'op.operating_id', 'oper.id')
+            ->join('partials as par', 'op.partial_id', 'par.id')
+            ->select('op.id', 'op.quantity', 'op.price', 'op.subtotal', 'op.item', 'ope.id as idO', 'ope.name', 'oper.operating')
+            ->where('par.id', '=', $id)
             ->get();
 
             return view('admin.partial.edit', compact('partials', 'operatingPartials'));
@@ -295,86 +295,84 @@ class PartialController extends Controller
             $quantity = $request->quantity;
             $price = $request->price;
 
-            $itemnew = count($operation_id);
             $partial = Partial::findOrFail($id);
-            if($itemnew != $partial->items){
 
-                return redirect("partial")->with('warning', 'Se requiere de todos los items');
-            }
-            $partial->total = $request->total;
-            $partial->update();
+                $remission = Remission::findOrFail($partial->remission_id)->first();
+                $remission->status = 'PROCESO';
+                $remission->update();
+                $cont = 0;
+                while($cont < count($operation_id) ){
+                    $operPartial = OperatingPartial::where('partial_id', '=', $id)->where('operation_id', '=', $operation_id[$cont])->first();
+                    $operation = Operation::where('id', '=', $operation_id[$cont])->first();
+                    $operRemission = OperationRemission::where('remission_id', '=', $partial->remission_id)->where('operation_id', '=', $operation->id)->first();
 
-            $remission = Remission::findOrFail($partial->remission_id)->first();
-            $remission->status = 'PROCESO';
-            $remission->update();
-            $cont = 0;
-            while($cont < count($operation_id) ){
-                $operPartial = OperatingPartial::where('partial_id', '=', $id)->where('operation_id', '=', $operation_id[$cont])->first();
-                $operation = Operation::where('id', '=', $operation_id[$cont])->first();
-                $operRemission = OperationRemission::where('remission_id', '=', $partial->remission_id)->where('operation_id', '=', $operation->id)->first();
+                    $subtotal = $quantity[$cont] * $price[$cont];
+                    //Metodo de actualizacion total en partial
+                    $partial = Partial::findOrFail($id);
+                    $totality = $partial->total;
+                    $total = $totality - $operPartial->subtotal;
+                    $partial->total = $total + $subtotal;
+                    $partial->update();
+                    //metodo para actualizar registro operation partial
+                    $operating = Operating::where('remission_id', '=', $partial->remission_id)->where('operation_id', '=', $operation_id[$cont])->first();
 
-                //metodo para actualizar registro operation partial
-                $operating = Operating::where('remission_id', '=', $partial->remission_id)->where('operation_id', '=', $operation_id[$cont])->first();
+                    $item = $cont +1;
+                    $qtOperating = $operating->operating;//cantidad en operating->operating
+                    $qtOP = $operPartial->quantity; //cantidad operatingPartial->quantity
+                    $stockOper = $operation->stock; //cantidad en operation->stock
+                    $pendingOR = $operRemission->pending; // cantidad en operationRemission->pending
+                    $pendingORem = $pendingOR + $qtOP; //suma los campos pendiente + cantidad de la operatingPartial
+                    $oldOperating = $qtOperating + $qtOP;
+                    $oldOperation = $stockOper + $qtOP;
+
+                    $operatingPartial = OperatingPartial::where('partial_id', '=', $id)->where('operation_id', '=', $operation_id[$cont])->first();
+                    $operatingPartial->quantity = $quantity[$cont];
+                    $operatingPartial->price = $price[$cont];
+                    $operatingPartial->subtotal = $subtotal;
+                    $operatingPartial->item = $item;
+                    $operatingPartial->operation_id = $operation_id[$cont];
+                    $operatingPartial->operating_id = $operating->id;
+                    $operatingPartial->partial_id = $id;
+                    $operatingPartial->update();
 
 
-                $subtotal = $quantity[$cont] * $price[$cont];
+                    //metodo para actualizar operating de la tabla operating
+                    $newOperating = $oldOperating - $quantity[$cont];
+                    $operating->operating = $newOperating;
+                    $operating->update();
 
-                $item = $cont +1;
-                $qtOperating = $operating->operating;//cantidad en operating->operating
-                $qtOP = $operPartial->quantity; //cantidad operatingPartial->quantity
-                $stockOper = $operation->stock; //cantidad en operation->stock
-                $pendingOR = $operRemission->pending; // cantidad en operationRemission->pending
-                $pendingORem = $pendingOR + $qtOP; //suma los campos pendiente + cantidad de la operatingPartial
-                $oldOperating = $qtOperating + $qtOP;
-                $oldOperation = $stockOper + $qtOP;
-                $operatingPartial = OperatingPartial::where('partial_id', '=', $id)->where('operation_id', '=', $operation_id[$cont])->first();
-                $operatingPartial->quantity = $quantity[$cont];
-                $operatingPartial->price = $price[$cont];
-                $operatingPartial->subtotal = $subtotal;
-                $operatingPartial->item = $item;
-                $operatingPartial->operation_id = $operation_id[$cont];
-                $operatingPartial->operating_id = $operating->id;;
-                $operatingPartial->partial_id = $id;
-                $operatingPartial->update();
+                    //metodo para actualizar stock de la tabla operation
+                    $newOperation = $oldOperation - $quantity[$cont];
+                    $operation->stock = $newOperation;
+                    $operation->update();
+                    //metodo para actualizar pendiente en operation remission
+                    $newPending = $pendingORem - $quantity[$cont];
+                    //$operationRemission = OperationRemission::findOrFail($operRemission->id);
+                    $operRemission->pending = $newPending;
+                    $operRemission->update();
 
-                //metodo para actualizar operating de la tabla operating
-                $newOperating = $oldOperating - $quantity[$cont];
-                $operating->operating = $newOperating;
-                $operating->update();
+                    //metodo para actualizar campo status de la remision
+                    $operationRemission = OperationRemission::where('remission_id', '=', $partial->remission_id)->get();
 
-                //metodo para actualizar stock de la tabla operation
-                $newOperation = $oldOperation - $quantity[$cont];
-                $operation->stock = $newOperation;
-                $operation->update();
-
-                //metodo para actualizar pendiente en operation remission
-                $newPending = $pendingORem - $quantity[$cont];
-                //$operationRemission = OperationRemission::findOrFail($operRemission->id);
-                $operRemission->pending = $newPending;
-                $operRemission->update();
-
-                //metodo para actualizar campo status de la remision
-                $operationRemission = OperationRemission::where('remission_id', '=', $partial->remission_id)->get();
-
-                $pend = 0;
-                foreach ($operationRemission as $or) {
-                    if ($or->pendig > 0) {
-                        $pend ++;
+                    $pend = 0;
+                    foreach ($operationRemission as $or) {
+                        if ($or->pendig > 0) {
+                            $pend ++;
+                        }
                     }
-                }
-                if ($pend > 0) {
-                    $remission = Remission::findOrFail($partial->remission_id);
-                    $remission->status = 'PARCIAL';
-                    $remission->update();
-                } else {
-                    $remission = Remission::findOrFail($partial->remission_id);
-                    $remission->status = 'FINALIZADA';
-                    $remission->update();
-                }
+                    if ($pend > 0) {
+                        $remission = Remission::findOrFail($partial->remission_id);
+                        $remission->status = 'PARCIAL';
+                        $remission->update();
+                    } else {
+                        $remission = Remission::findOrFail($partial->remission_id);
+                        $remission->status = 'FINALIZADA';
+                        $remission->update();
+                    }
 
 
-                $cont ++;
-            }
+                    $cont ++;
+                }
 
             DB::commit();
         } catch (Exception $e) {

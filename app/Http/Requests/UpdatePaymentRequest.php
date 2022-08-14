@@ -28,6 +28,7 @@ class UpdatePaymentRequest extends FormRequest
             'advance'           => '',
             'total'             => '',
             'reference'         => 'required',
+            'status'            => '',
             'bank_id'           => 'required',
             'payment_method_id' => 'required',
             'user_id'           => 'required',

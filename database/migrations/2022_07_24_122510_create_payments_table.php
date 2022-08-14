@@ -20,6 +20,7 @@ return new class extends Migration
             $table->biginteger('discount');
             $table->bigInteger('total');
             $table->string('reference', 20)->nullable();
+            $table->enum('status',['PENDIENTE', 'PAGADO'])->default('PENDIENTE');
 
             $table->foreignId('bank_id')->nullable()->constrained()->onUpdate('cascade');//Banco de destino de fondos
             $table->foreignId('payment_method_id')->constrained()->onUpdate('cascade');

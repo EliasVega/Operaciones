@@ -13,6 +13,7 @@ use App\Http\Controllers\OperatingPartialController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\PartialController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentDateController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PresuntivePaymentController;
 use App\Http\Controllers\RemissionController;
@@ -57,6 +58,7 @@ Route::resource('payment', PaymentController::class);
 Route::resource('advance', AdvanceController::class);
 Route::resource('presuntive', PresuntivePaymentController::class);
 Route::resource('increment', IncrementController::class);
+Route::resource('paymentdate', PaymentDateController::class);
 
 
 Route::get('inactive', [UserController::class, 'inactive'])->name('inactive');
@@ -73,5 +75,8 @@ Route::get('storeCreate', [PaymentController::class, 'storeCreate'])->name('stor
 Route::get('payment/showPdfPayment/{id}', [PaymentController::class, 'showPdfPayment'])->name('showPdfPayment');
 
 Route::get('aprobation/{id}', [PartialController::class, 'aprobation'])->name('aprobation');
+
+Route::get('statuspayment/{id}', [PaymentController::class, 'statuspayment'])->name('statuspayment');
+Route::get('pending', [PaymentDateController::class, 'pending'])->name('pending');
 
 

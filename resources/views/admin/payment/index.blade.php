@@ -10,11 +10,11 @@
                 @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                     <a href="payment/create" class="btn btn-success"><i class="fa fa-plus mr-2"></i>Agregar Pago</a>
                     <a href="{{ route('storeCreate') }}" class="btn btn-lilaR"><i class="fas fa-undo-alt mr-2"></i>Generar Pagos</a>
+                    <a href="{{ route('presuntive.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Presuntivo</a>
+                    <a href="{{ route('paymentdate.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Fechas </a>
+                    <a href="{{ route('pending') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Pendiente </a>
                 @endif
                 <a href="{{ route('remission.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
-
-                <a href="{{ route('presuntive.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>Pago Presuntivo</a>
-
             </h3>
         </div>
     </div>
@@ -62,7 +62,7 @@ $(document).ready(function ()
                 {data: 'discount'},
                 {data: 'total'},
                 {data: 'created_at'},
-                {data: 'edit'},
+                {data: 'btn'},
             ],
             dom: '<"pull-left"B><"pull-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
             buttons:

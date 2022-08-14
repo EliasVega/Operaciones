@@ -14,6 +14,7 @@ class Payment extends Model
         'advance',
         'total',
         'reference',
+        'status',
         'bank_id',
         'payment_method_id',
         'user_id',

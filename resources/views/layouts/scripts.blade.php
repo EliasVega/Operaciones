@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 
 <script src="https://kit.fontawesome.com/88e63931e0.js" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/58291d7924.js" crossorigin="anonymous"></script>
 
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js" defer></script>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" defer></script>
@@ -35,5 +35,7 @@
 <script src="{{ asset('js/app.min.js')}}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('plugins/select2-develop/dist/js/select2.min.js') }}"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.11.5/api/sum().js"></script>
 
 

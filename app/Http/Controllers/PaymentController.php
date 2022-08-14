@@ -39,7 +39,7 @@ class PaymentController extends Controller
                 ->join('payment_methods as pm', 'pay.payment_method_id', 'pm.id')
                 ->join('users as use', 'pay.user_id', 'use.id')
                 ->join('users as user', 'pay.responsible_id', 'user.id')
-                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
+                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'pay.status', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
                 ->get();
             } else {
                 $payments = Payment::from('payments as pay')
@@ -48,23 +48,34 @@ class PaymentController extends Controller
                 ->join('payment_methods as pm', 'pay.payment_method_id', 'pm.id')
                 ->join('users as use', 'pay.user_id', 'use.id')
                 ->join('users as user', 'pay.responsible_id', 'user.id')
-                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
+                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'pay.status', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
                 ->wher('use.id', '=', $usid)
                 ->get();
             }
-
-
-
             return datatables()
             ->of($payments)
             ->editColumn('created_at', function(Payment $payment){
                 return $payment->created_at->format('Y-m-d');
             })
-            ->addColumn('edit', 'admin/payment/actions')
-            ->rawcolumns(['edit'])
+            ->addColumn('btn', 'admin/payment/actions')
+            ->rawcolumns(['btn'])
             ->toJson();
         }
         return view('admin.payment.index');
+    }
+
+    public function statuspayment($id)
+    {
+        $payment = Payment::findOrFail($id);
+
+        if ($payment->status == 'PENDIENTE') {
+            $payment->status = 'PAGADO';
+        } else {
+            $payment->status = 'PENDIENTE';
+        }
+        $payment->update();
+
+        return redirect('payment');
     }
 
     /**
@@ -126,6 +137,7 @@ class PaymentController extends Controller
                     $payment->discount = $advances;
                     $payment->total = $partials - $advances;
                     $payment->reference = $reference[$cont];
+                    $payment->status = 'PENDIENTE';
                     $payment->bank_origin_id = $bank_origin_id[$cont];
                     $payment->bank_id = $bank_id[$cont];
                     $payment->payment_method_id = $payment_method_id[$cont];
@@ -233,6 +245,7 @@ class PaymentController extends Controller
                         $payment->discount = $advances;
                         $payment->total = $partials - $advances;
                         $payment->reference = $use->reference;
+                        $payment->status = 'PENDIENTE';
                         $payment->bank_origin_id = $bank;
                         $payment->bank_id = $use->idB;
                         $payment->payment_method_id = $use->idPM;

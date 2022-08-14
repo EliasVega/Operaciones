@@ -53,7 +53,7 @@ class RemissionController extends Controller
             return datatables()
             ->of($remissions)
             ->editColumn('created_at', function(Remission $remission){
-                return $remission->created_at->format('yy-m-d: h:m');
+                return $remission->created_at->format('Y-m-d');
             })
             ->addColumn('btn', 'admin/remission/actions')
             ->addColumn('delete', 'admin/remission/delete')

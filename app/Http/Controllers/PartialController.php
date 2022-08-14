@@ -54,7 +54,7 @@ class PartialController extends Controller
             return datatables()
             ->of($partials)
             ->editColumn('created_at', function(Partial $partial){
-                return $partial->created_at->format('yy-m-d');
+                return $partial->created_at->format('Y-m-d');
             })
             ->addColumn('btn', 'admin/partial/actions')
             ->rawcolumns(['btn'])

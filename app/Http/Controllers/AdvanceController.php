@@ -45,7 +45,7 @@ class AdvanceController extends Controller
             return datatables()
             ->of($advances)
             ->editColumn('created_at', function(Advance $advance){
-                return $advance->created_at->format('yy-m-d');
+                return $advance->created_at->format('Y-m-d');
             })
             ->addColumn('btn', 'admin/advance/actions')
             ->rawcolumns(['btn'])

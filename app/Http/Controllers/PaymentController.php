@@ -58,7 +58,7 @@ class PaymentController extends Controller
             return datatables()
             ->of($payments)
             ->editColumn('created_at', function(Payment $payment){
-                return $payment->created_at->format('y-m-d');
+                return $payment->created_at->format('Y-m-d');
             })
             ->addColumn('edit', 'admin/payment/actions')
             ->rawcolumns(['edit'])

@@ -291,7 +291,7 @@ class PartialController extends Controller
         try {
             DB::beginTransaction();
             //trayendo variables del array
-            $operation_id = $request->operation_id;
+            $operation_id = $request->idO;
             $quantity = $request->quantity;
             $price = $request->price;
 

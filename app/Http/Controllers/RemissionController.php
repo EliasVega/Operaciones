@@ -47,9 +47,6 @@ class RemissionController extends Controller
                 ->where('use.id', '=', $usid)
                 ->get();
             }
-
-
-
             return datatables()
             ->of($remissions)
             ->editColumn('created_at', function(Remission $remission){

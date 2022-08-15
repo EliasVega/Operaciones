@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained()->onUpdate('cascade');
             $table->foreignId('payment_id')->nullable()->constrained()->onUpdate('cascade');
-            $table->foreignId('responsible_id')->references('id')->on('users');
+            $table->foreignId('responsible_id')->references('id')->on('users')->onUpdate('cascade');
 
             $table->timestamps();
         });

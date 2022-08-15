@@ -46,6 +46,7 @@ REPORTE GENERAL DE PAGOS
                     <thead>
                         <tr class="bg-info">
                             <th>Id</th>
+                            <th>Fecha</th>
                             <th>Operario</th>
                             <th>Medio de Pago</th>
                             <th>Banco Destino</th>
@@ -53,7 +54,6 @@ REPORTE GENERAL DE PAGOS
                             <th>Devengados</th>
                             <th>Deducciones</th>
                             <th>Total</th>
-                            <th>Fecha</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -85,7 +85,8 @@ REPORTE GENERAL DE PAGOS
         load_data();
         function load_data(start = '', end = '')
         {
-            $('#paymentdates').DataTable({
+        var tabla =    $('#paymentdates').DataTable({
+
                 responsive: true,
                 autoWidth: false,
                 processing: true,
@@ -99,6 +100,7 @@ REPORTE GENERAL DE PAGOS
                 columns:
                 [
                     {data: 'id'},
+                    {data: 'created_at'},
                     {data: 'name'},
                     {data: 'nameP'},
                     {data: 'nameB'},
@@ -106,7 +108,6 @@ REPORTE GENERAL DE PAGOS
                     {data: 'amount'},
                     {data: 'discount'},
                     {data: 'total'},
-                    {data: 'created_at'},
                 ],
                 dom: '<"pull-left"B><"pull-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',
                 buttons:
@@ -148,6 +149,7 @@ REPORTE GENERAL DE PAGOS
                 },
             });
         }
+
 
         $('#filter').click(function () {
             start = $('#start').val();

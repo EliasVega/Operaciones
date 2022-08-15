@@ -108,7 +108,7 @@ class AdvanceController extends Controller
         $advance = Advance::from('advances as adv')
         ->join('users as use', 'adv.user_id', 'use.id')
         ->join('users as user', 'adv.responsible_id', 'user.id')
-        ->select('adv.id', 'adv.amount', 'adv.description', 'adv.status', 'adv.created_at', 'use.name', 'user.name as nameR')
+        ->select('adv.id', 'adv.amount', 'adv.description', 'adv.status', 'adv.created_at', 'use.id as idU', 'use.name', 'user.name as nameR')
         ->where('adv.id', '=', $id)
         ->first();
         return view('admin.advance.edit', compact('advance'));

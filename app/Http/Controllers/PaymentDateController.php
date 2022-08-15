@@ -15,7 +15,9 @@ class PaymentDateController extends Controller
      */
     public function index(Request $request)
     {
+        $date1 = $request->start;
         $payment = Payment::sum('total');
+
         $user = Auth::user()->role_id;
         $usid = Auth::user()->id;
 
@@ -23,6 +25,7 @@ class PaymentDateController extends Controller
         if (request()->ajax()) {
             if ($user != 4) {
                 if (!empty($request->end)) {
+                    $payment = Payment::whereBetween('created_at', [$request->start, $request->end])->sum('total');
                     $payments = Payment::from('payments as pay')
                     ->join('banks as ban', 'pay.bank_id', 'ban.id')
                     ->join('banks as bank', 'pay.bank_origin_id', 'bank.id')
@@ -32,6 +35,7 @@ class PaymentDateController extends Controller
                     ->whereBetween('pay.created_at', [$request->start, $request->end])
                     ->get();
                 } else {
+                    $payment = Payment::sum('total');
                     $payments = Payment::from('payments as pay')
                     ->join('banks as ban', 'pay.bank_id', 'ban.id')
                     ->join('banks as bank', 'pay.bank_origin_id', 'bank.id')
@@ -56,7 +60,7 @@ class PaymentDateController extends Controller
 
     public function pending(Request $request)
     {
-        $payment = Payment::where('status', '=', 'PENDIENTE')->sum('total');
+        $payment = Payment::where('status', '=', 'PAGADO')->sum('total');
         $user = Auth::user()->role_id;
         $usid = Auth::user()->id;
         if (request()->ajax()) {
@@ -67,7 +71,7 @@ class PaymentDateController extends Controller
                 ->join('payment_methods as pm', 'pay.payment_method_id', 'pm.id')
                 ->join('users as use', 'pay.user_id', 'use.id')
                 ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'ban.name as nameB', 'pm.name as nameP', 'use.name', 'pay.created_at')
-                ->where('pay.status', '=', 'PENDIENTE')
+                ->where('pay.status', '=', 'PAGADO')
                 ->get();
             }
 

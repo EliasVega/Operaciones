@@ -12,10 +12,16 @@
                     <a href="{{ route('storeCreate') }}" class="btn btn-lilaR"><i class="fas fa-undo-alt mr-2"></i>Generar Pagos</a>
                     <a href="{{ route('presuntive.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Presuntivo</a>
                     <a href="{{ route('paymentdate.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Fechas </a>
-                    <a href="{{ route('pending') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>P. Pendiente </a>
+                    <a href="{{ route('pending') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>Pagos General </a>
                 @endif
                 <a href="{{ route('remission.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
             </h3>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+            <div class="form-group">
+                <label for="totalpagos">Total Pagos Pendientes</label>
+                <a href="{{ route('payment.index') }}" class="btn btn-gris">{{ $payment }}</a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -25,6 +31,7 @@
                     <thead>
                         <tr class="bg-info">
                             <th>Id</th>
+                            <th>Fecha</th>
                             <th>Operario</th>
                             <th>Medio de Pago</th>
                             <th>Banco Destino</th>
@@ -32,7 +39,7 @@
                             <th>Devengados</th>
                             <th>Deducciones</th>
                             <th>Total</th>
-                            <th>Fecha</th>
+
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -54,6 +61,7 @@ $(document).ready(function ()
             columns:
             [
                 {data: 'id'},
+                {data: 'created_at'},
                 {data: 'name'},
                 {data: 'nameP'},
                 {data: 'nameB'},
@@ -61,7 +69,7 @@ $(document).ready(function ()
                 {data: 'amount'},
                 {data: 'discount'},
                 {data: 'total'},
-                {data: 'created_at'},
+
                 {data: 'btn'},
             ],
             dom: '<"pull-left"B><"pull-right"f>rt<"row"<"col-sm-4"l><"col-sm-4"i><"col-sm-4"p>>',

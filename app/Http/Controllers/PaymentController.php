@@ -29,6 +29,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        $payment = Payment::where('status', '=', 'PENDIENTE')->sum('total');
         $user = Auth::user()->role_id;
         $usid = Auth::user()->id;
         if (request()->ajax()) {
@@ -39,7 +40,8 @@ class PaymentController extends Controller
                 ->join('payment_methods as pm', 'pay.payment_method_id', 'pm.id')
                 ->join('users as use', 'pay.user_id', 'use.id')
                 ->join('users as user', 'pay.responsible_id', 'user.id')
-                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'pay.status', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
+                ->select('pay.id','pay.created_at', 'use.name', 'pm.name as nameP', 'ban.name as nameB', 'pay.reference', 'pay.amount', 'pay.discount', 'pay.total', 'pay.status')
+                ->where('pay.status', '=', 'PENDIENTE')
                 ->get();
             } else {
                 $payments = Payment::from('payments as pay')
@@ -61,7 +63,7 @@ class PaymentController extends Controller
             ->rawcolumns(['btn'])
             ->toJson();
         }
-        return view('admin.payment.index');
+        return view('admin.payment.index', compact('payment'));
     }
 
     public function statuspayment($id)

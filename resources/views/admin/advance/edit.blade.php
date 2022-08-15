@@ -31,7 +31,7 @@
                     <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group" id="user">
                             <label for="user_id">Operario</label>
-                            <input type="text" name="user_id" class="form-control" value="{{ $advance->id }}" readonly>
+                            <input type="text" name="user_id" class="form-control" value="{{ $advance->idU }}" readonly>
                         </div>
                     </div>
                     <div class="clearfix"></div>

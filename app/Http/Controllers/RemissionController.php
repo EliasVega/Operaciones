@@ -383,13 +383,6 @@ class RemissionController extends Controller
                 $operationRemission->pending = $quantity[$cont];
                 $operationRemission->update();
 
-                $operation = Operation::findOrFail($operation_id[$cont]);
-                $stocky = $operRemis->quantity;
-                $stock = $operation->stock;
-                $stock = $stock - $stocky;
-                $operation->stock = $stock + $quantity[$cont];
-                $operation->update();
-
                 $opera = Operating::from('operatings as ope')
                 ->join('operations as oper', 'ope.operation_id', 'oper.id')
                 ->join('remissions as rem', 'ope.remission_id', 'rem.id')

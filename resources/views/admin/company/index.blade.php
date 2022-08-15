@@ -97,6 +97,16 @@
             <a href="{{ route('increment.create') }}"><button><img src="{{ asset('/img/inc.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Incremento" /></button></a>
         </div>
     </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
+        <div>
+            <a href="{{ route('operation.index') }}"><button><img src="{{ asset('/img/ope.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Operaciones" /></button></a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 vh-30 center">
+        <div>
+            <a href="{{ route('category.index') }}"><button><img src="{{ asset('/img/cat.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Categorias" /></button></a>
+        </div>
+    </div>
 
 </div>
 @endsection

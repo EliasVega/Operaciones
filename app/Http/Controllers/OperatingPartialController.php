@@ -139,7 +139,7 @@ class OperatingPartialController extends Controller
             DB::rollback();
         }
 
-        return redirect('payment')->with('warning', 'Nomina Generada con exito');
+        return redirect('payment')->with('warning', 'Pago Generado con exito');
     }
 
     /**

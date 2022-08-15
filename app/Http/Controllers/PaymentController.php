@@ -194,7 +194,7 @@ class PaymentController extends Controller
             DB::rollback();
         }
 
-        return redirect('payment')->with('warning', 'Nomina Generada con exito');
+        return redirect('payment')->with('warning', 'Pgo Generado con exito');
     }
 
     public function storeCreate()
@@ -304,7 +304,7 @@ class PaymentController extends Controller
             DB::rollback();
         }
 
-        return redirect('payment')->with('warning', 'Nomina Generada con exito');
+        return redirect('payment')->with('warning', 'Pago Generado con exito');
     }
 
 

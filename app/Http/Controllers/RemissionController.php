@@ -129,7 +129,7 @@ class RemissionController extends Controller
         catch(Exception $e){
             DB::rollback();
         }
-        return redirect('remission')->with('warning', 'Remision creada satisfactoriamente');
+        return redirect('remission')->with('warning', 'Orden creada satisfactoriamente');
     }
 
     /**
@@ -198,7 +198,7 @@ class RemissionController extends Controller
 
         $partialTotal = Partial::where('remission_id', '=', $remissions->id)->first();
         if ($partialTotal) {
-            return redirect('remission')->with('warning', 'Esta Remision ya tiene entregas');
+            return redirect('remission')->with('warning', 'Esta Orden ya tiene entregas');
         } else {
             try {
                 DB::beginTransaction();
@@ -327,7 +327,7 @@ class RemissionController extends Controller
             ->get();
 
         } else {
-            return redirect('remission')->with('warning', 'Esta remision ya tiene entregas y no se puede editar');
+            return redirect('remission')->with('warning', 'Esta Orden ya tiene entregas y no se puede editar');
         }
         return view('admin.remission.edit', compact('remission', 'users', 'operationRemissions'));
 
@@ -402,7 +402,7 @@ class RemissionController extends Controller
         catch(Exception $e){
             DB::rollback();
         }
-        return redirect('remission')->with('warning', 'Remision editada satisfactoriamente');
+        return redirect('remission')->with('warning', 'Orden editada satisfactoriamente');
     }
 
     /**
@@ -420,7 +420,7 @@ class RemissionController extends Controller
         ->first();
 
         if ($partial != null) {
-            return redirect("remission")->with('warning', 'esta remision ya tiene entregas');
+            return redirect("remission")->with('warning', 'esta Orden ya tiene entregas');
         }
         try{
             DB::beginTransaction();
@@ -469,6 +469,6 @@ class RemissionController extends Controller
         catch(Exception $e){
             DB::rollback();
         }
-        return redirect('remission')->with('warning', 'Remision fue eliminada');
+        return redirect('remission')->with('warning', 'Orden fue eliminada');
     }
 }

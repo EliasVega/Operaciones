@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
 
         $user->company_id = 1;
         $user->document_id = 2;
-        $user->role_id = 1;
+        $user->role_id = 2;
         $user->bank_id = 1;
         $user->payment_method_id = 3;
         $user->name = 'JHON A. VEGA VALDIVIESO';

@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ url('product') }}" class="brand-link elevation-4">
         <span class="logo-mini"><strong class="titulo-show">E</strong></span>
-        <span class="brand-text font-weight-light"><strong>counts</strong> </span>
+        <span class="brand-text font-weight-light"><strong>mdisoft</strong> </span>
     </a>
 
     <!-- Sidebar -->

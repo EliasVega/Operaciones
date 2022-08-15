@@ -1,6 +1,6 @@
 @extends("layouts.admin")
 @section('titulo')
-{{ config('app.name', 'Ecounts') }}
+{{ config('app.name', 'Emdisoft') }}
 @endsection
 @section('content')
 <main class="main">
@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="form-group">
-                <label class="form-control-label" for="invoice">REMISION No.</label>
+                <label class="form-control-label" for="invoice">ORDEN OPERACION No.</label>
                 <h4>{{ $remissions->id }}</h4>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
-                    <h3>Detalle de la Remision
+                    <h3>Detalle de la Orden de Operacion
                         <a href="{{ route('remission.index') }}" class="btn btn-limon"><i class="fas fa-undo-alt mr-2"></i>Regresar</a></h3>
                 </div>
             </div>

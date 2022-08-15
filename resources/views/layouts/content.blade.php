@@ -6,7 +6,7 @@
               <!-- Default box -->
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title"><strong class="titulo-mostrar mr-3">Ecounts:</strong>
+                  <h3 class="card-title"><strong class="titulo-mostrar mr-3">Emdisoft:</strong>
                   @if (Session::has('sede'))
                   {{ Session::get('nombre') }}
                   @endif

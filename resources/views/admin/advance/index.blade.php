@@ -9,7 +9,7 @@
             <h3>Listado de Avances
                 @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                     <a href="advance/create" class="btn btn-success"><i class="fa fa-plus mr-2"></i> Agregar Avance</a>
-                    <a href="{{ route('company.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
+                    <a href="{{ route('remission.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
                 @endif
                 @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 4)
                     <a href="{{ route('remission.index') }}" class="btn btn-limon"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>

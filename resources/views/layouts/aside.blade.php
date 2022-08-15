@@ -102,12 +102,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('indicator') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Indicadores</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ url('department') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Departamentos</p>
@@ -131,41 +125,11 @@
                                 <p>T/Documentos</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('liability') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>R.Fiscales</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('organization') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>T.Organizacion</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('tax') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tributos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('regime') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Regimen</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('retention') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Retefuentes</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 @endif
                 @endif
-                @if (!Session::has('company') && !Session::has('sede'))
+                @if (!Session::has('company') && !Session::has('remission'))
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -189,24 +153,16 @@
                             </a>
                         </li>
                         @endif
-                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
-                        <li class="nav-item">
-                            <a href="{{ url('productBranch') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Traslados</p>
-                            </a>
-                        </li>
-                        @endif
                     </ul>
                 </li>
                 @endif
-                @if (!Session::has('company') && !Session::has('sede'))
-                @if (Auth::user()->role_id != 5)
+                @if (!Session::has('company') && !Session::has('remission'))
+                @if (Auth::user()->role_id == 3)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Compras
+                            Supervision
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -217,95 +173,47 @@
                                 <p>Categorias</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('supplier') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Proveedores</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('product') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
                         <li>
-                            <a href="{{ url('purchase') }}" class="nav-link">
+                            <a href="{{ url('remission') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Compras</p>
+                                <p>Orden Produccion</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('ncpurchase') }}" class="nav-link">
+                            <a href="{{ url('partial') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>NC Compra</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('ndpurchase') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ND Compra</p>
+                                <p>Entregas Parciales</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 @endif
-                @if (Auth::user()->role_id != 4)
+                @if (Auth::user()->role_id == 4)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Ventas
+                            Operadores
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('saleBox') }}" class="nav-link">
+                            <a href="{{ url('payment') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Caja</p>
+                                <p>Pagos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('order') }}" class="nav-link">
+                            <a href="{{ url('remission') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Pedidos</p>
+                                <p>Ordenes Produccion</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('payOrder') }}" class="nav-link">
+                            <a href="{{ url('partial') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Abonos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('customer') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Clientes</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('product') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('invoice') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ventas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('ncinvoice') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>NC Venta</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('ndinvoice') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>ND Venta</p>
+                                <p>Entregas</p>
                             </a>
                         </li>
                     </ul>

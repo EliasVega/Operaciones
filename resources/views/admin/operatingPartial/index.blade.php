@@ -16,7 +16,7 @@
                 <thead>
                     <tr class="bg-success">
                         <th>Id</th>
-                        <th>Rem.</th>
+                        <th>O.P.</th>
                         <th>Ent.</th>
                         <th>Operador</th>
                         <th>Operacion</th>

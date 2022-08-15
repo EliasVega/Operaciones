@@ -8,14 +8,15 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h3>Listado de Ordenes de Produccion
                 <a href="{{ route('partial.index') }}" class="btn btn-celeste"><i class="fas fa-undo-alt mr-2"></i>Entregas</a>
-                <a href="{{ route('advance.index') }}" class="btn btn-lilaR"><i class="fas fa-undo-alt mr-2"></i>Deducciones</a>
                 <a href="{{ route('payment.index') }}" class="btn btn-verdeR"><i class="fas fa-undo-alt mr-2"></i>Pagos</a>
                 @if (Auth::user()->role_id != 4)
                 <a href="remission/create" class="btn btn-success"><i class="fa fa-plus mr-2"></i> Agregar Orden de Produccion</a>
+
                 @endif
 
                 @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                     <a href="{{ route('company.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
+                    <a href="{{ route('advance.index') }}" class="btn btn-lilaR"><i class="fas fa-undo-alt mr-2"></i>Deducciones</a>
                 @endif
 
                 </h3>

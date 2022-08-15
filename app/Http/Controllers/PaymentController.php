@@ -50,8 +50,8 @@ class PaymentController extends Controller
                 ->join('payment_methods as pm', 'pay.payment_method_id', 'pm.id')
                 ->join('users as use', 'pay.user_id', 'use.id')
                 ->join('users as user', 'pay.responsible_id', 'user.id')
-                ->select('pay.id', 'pay.amount', 'pay.discount', 'pay.total', 'pay.reference', 'pay.status', 'ban.name as nameB', 'bank.name as nameBO', 'pm.name as nameP', 'use.name', 'user.name as nameU', 'pay.created_at')
-                ->wher('use.id', '=', $usid)
+                ->select('pay.id','pay.created_at', 'use.name', 'pm.name as nameP', 'ban.name as nameB', 'pay.reference', 'pay.amount', 'pay.discount', 'pay.total', 'pay.status')
+                ->where('pay.user_id', '=', $usid)
                 ->get();
             }
             return datatables()

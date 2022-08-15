@@ -17,12 +17,15 @@
                 <a href="{{ route('remission.index') }}" class="btn btn-limonR"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
             </h3>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-            <div class="form-group">
-                <label for="totalpagos">Total Pagos Pendientes</label>
-                <a href="{{ route('payment.index') }}" class="btn btn-gris">{{ $payment }}</a>
+        @if (Auth::user()->role_id != 4)
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label for="totalpagos">Total Pagos Pendientes</label>
+                    <a href="{{ route('payment.index') }}" class="btn btn-gris">{{ $payment }}</a>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

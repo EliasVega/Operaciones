@@ -7,7 +7,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="box-danger">
             <div class="box-header with-border">
-                <h3 class="box-title">Editar Remision : &nbsp;&nbsp;&nbsp;&nbsp;{{ $remission->id }}</h3>
+                <h3 class="box-title">Editar Orden Produccion : &nbsp;&nbsp;&nbsp;&nbsp;{{ $remission->id }}</h3>
             </div>
             @if (count($errors)>0)
                 <div class="alert alert-danger">

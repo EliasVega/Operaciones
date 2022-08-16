@@ -209,7 +209,7 @@ class OperationSeeder extends Seeder
 
         $operation->category_id = 1;
         $operation->name = 'CERRADORA ESPALDA';
-        $operation->price = 33333;
+        $operation->price = 88;
         $operation->stock = 0;
         $operation->status = 'ACTIVA';
 

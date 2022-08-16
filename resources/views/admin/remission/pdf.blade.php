@@ -23,7 +23,7 @@
             </div>
             <!--DATOS FACTURA -->
             <div id="factura">
-                <p> <h4>REMISION <br> <strong id="numfact">N°.{{ $remissions->id }}</strong>  </h4>
+                <p> <h4>ORDEN DE PRODUCCION <br> <strong id="numfact">N°.{{ $remissions->id }}</strong>  </h4>
 
                 </p>
                 <p> <h4>FECHA DE EMISION <br> <strong id="datosfact">{{ date('d-m-Y', strtotime($remissions->created_at)) }}</strong>  </h4>

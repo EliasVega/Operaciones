@@ -1,6 +1,6 @@
 @extends("layouts.admin")
 @section('titulo')
-{{ config('app.name', 'Ecounts') }}
+{{ config('app.name', 'LiquidaOP') }}
 @endsection
 @section('content')
 <main class="main">

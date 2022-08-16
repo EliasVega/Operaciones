@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('product') }}" class="brand-link elevation-4">
-        <span class="logo-mini"><strong class="titulo-show">E</strong></span>
-        <span class="brand-text font-weight-light"><strong>mdisoft</strong> </span>
+        <span class="logo-mini"><strong class="titulo-show">L</strong></span>
+        <span class="brand-text font-weight-light"><strong>iquidaOP</strong> </span>
     </a>
 
     <!-- Sidebar -->

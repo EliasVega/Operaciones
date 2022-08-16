@@ -1,6 +1,6 @@
 @extends("layouts.admin")
 @section('titulo')
-{{ config('app.name', 'Ecounts') }}
+{{ config('app.name', 'LiquidaOP') }}
 REPORTE GENERAL DE PAGOS
 @endsection
 @section('content')

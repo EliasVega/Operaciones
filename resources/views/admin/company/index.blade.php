@@ -102,7 +102,6 @@
             <a href="{{ route('category.index') }}"><button><img src="{{ asset('/img/cat.jpg') }}" height ="120" width="120" data-toggle="tooltip" data-placement="top" title="Categorias" /></button></a>
         </div>
     </div>
-
 </div>
 @endsection
 

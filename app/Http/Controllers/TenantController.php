@@ -49,13 +49,13 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
-        $domain = '.liquidar.test';
-        $base = 'liquidar_';
+        $domain = '.emdisoft.com.co';
+        $database = 'emdisoft_' . $name;
 
         $tenant = new Tenant();
         $tenant->name = $request->name;
         $tenant->domain = $name.$domain;
-        $tenant->database = $base . $name;
+        $tenant->database = $database;
         $tenant->save();
 
         return redirect('tenant');

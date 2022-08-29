@@ -90,7 +90,7 @@ if (Tenant::current()) {
     Route::get('pending', [PaymentDateController::class, 'pending'])->name('pending');
 
 } else {
-    Route::domain('liquidar.test')->group(function () {
+    Route::domain('emdisoft.com.co')->group(function () {
         Route::get('/', function () {
             return view('auth/login');
         });

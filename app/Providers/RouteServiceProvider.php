@@ -42,7 +42,14 @@ class RouteServiceProvider extends ServiceProvider
             $api = ['api'];
             $web = ['web'];
 
+            if (Tenant::current()) {
+                array_push($api, 'tenant.api');
+                array_push($web, 'tenant.web');
+            } else {
+                config(['database.default' => 'landlord']);
+            }
 
+            /*
             if (Tenant::current()) {
                 array_push($api, 'tenant.api');
                 array_push($web, 'tenant.web');
@@ -50,14 +57,14 @@ class RouteServiceProvider extends ServiceProvider
 
             if (Tenant::current()==null) {
                 config(['database.default' => 'landlord']);
-            }
+            }*/
 
             $domain = parse_url(config('app.url'), PHP_URL_HOST);
 
             Route::domain($domain)
             ->middleware($web)
             ->namespace($this->namespace)
-            ->group(base_path('routes\landlord\web.php'));
+            ->group(base_path('routes/web.php'));
 
             Route::prefix('api')
                 ->middleware($api)

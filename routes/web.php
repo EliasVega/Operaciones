@@ -40,52 +40,70 @@ Route::domain('laravel.test')->group(function () {
     });
 });*/
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+if (Tenant::current()) {
+    Route::get('/', function () {
+        return view('auth/login');
+    });
 
+        Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
+    Route::resource('user', UserController::class);
+    Route::resource('document', DocumentController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('department', DepartmentController::class);
+    Route::resource('municipality', MunicipalityController::class);
+    Route::resource('company', CompanyController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('operation', OperationController::class);
+    Route::resource('remission', RemissionController::class);
+    Route::resource('operating', OperatingController::class);
+    Route::resource('partial', PartialController::class);
+    Route::resource('operatingPartial', OperatingPartialController::class);
+    Route::resource('bank', BankController::class);
+    Route::resource('paymentMethod', PaymentMethodController::class);
+    Route::resource('payment', PaymentController::class);
+    Route::resource('advance', AdvanceController::class);
+    Route::resource('presuntive', PresuntivePaymentController::class);
+    Route::resource('increment', IncrementController::class);
+    Route::resource('paymentdate', PaymentDateController::class);
+
+
+    Route::get('inactive', [UserController::class, 'inactive'])->name('inactive');
+    Route::get('status/{id}', [UserController::class, 'status'])->name('status');
+
+    Route::get('remission/showPdfRemission/{id}', [RemissionController::class, 'showPdfRemission'])->name('showPdfRemission');
+    Route::get('remission/EntegaPartial/{id}', [RemissionController::class, 'EntregaPartial'])->name('EntregaPartial');
+    Route::get('remission/EntegaTotal/{id}', [RemissionController::class, 'EntregaTotal'])->name('EntregaTotal');
+
+    Route::get('partial/showPdfPartial/{id}', [PartialController::class, 'showPdfPartial'])->name('showPdfPartial');
+    Route::post('storetotal', [PaymentController::class, 'storetotal'])->name('storetotal');
+    Route::get('storeCreate', [PaymentController::class, 'storeCreate'])->name('storeCreate');
+
+    Route::get('payment/showPdfPayment/{id}', [PaymentController::class, 'showPdfPayment'])->name('showPdfPayment');
+
+    Route::get('aprobation/{id}', [PartialController::class, 'aprobation'])->name('aprobation');
+
+    Route::get('statuspayment/{id}', [PaymentController::class, 'statuspayment'])->name('statuspayment');
+    Route::get('pending', [PaymentDateController::class, 'pending'])->name('pending');
+
+} else {
+    Route::domain('liquidar.test')->group(function () {
+        Route::get('/', function () {
+            return view('auth/login');
+        });
+    });
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-        return view('dashboard');
+        return view('landlord.tenant.index');
     })->name('dashboard');
 
+    Route::resource('user', UserController::class);
 
-Route::resource('user', UserController::class);
-Route::resource('document', DocumentController::class);
-Route::resource('role', RoleController::class);
-Route::resource('department', DepartmentController::class);
-Route::resource('municipality', MunicipalityController::class);
-Route::resource('company', CompanyController::class);
-Route::resource('category', CategoryController::class);
-Route::resource('operation', OperationController::class);
-Route::resource('remission', RemissionController::class);
-Route::resource('operating', OperatingController::class);
-Route::resource('partial', PartialController::class);
-Route::resource('operatingPartial', OperatingPartialController::class);
-Route::resource('bank', BankController::class);
-Route::resource('paymentMethod', PaymentMethodController::class);
-Route::resource('payment', PaymentController::class);
-Route::resource('advance', AdvanceController::class);
-Route::resource('presuntive', PresuntivePaymentController::class);
-Route::resource('increment', IncrementController::class);
-Route::resource('paymentdate', PaymentDateController::class);
+    Route::resource('tenant', TenantController::class);
+}
 
 
-Route::get('inactive', [UserController::class, 'inactive'])->name('inactive');
-Route::get('status/{id}', [UserController::class, 'status'])->name('status');
 
-Route::get('remission/showPdfRemission/{id}', [RemissionController::class, 'showPdfRemission'])->name('showPdfRemission');
-Route::get('remission/EntegaPartial/{id}', [RemissionController::class, 'EntregaPartial'])->name('EntregaPartial');
-Route::get('remission/EntegaTotal/{id}', [RemissionController::class, 'EntregaTotal'])->name('EntregaTotal');
-
-Route::get('partial/showPdfPartial/{id}', [PartialController::class, 'showPdfPartial'])->name('showPdfPartial');
-Route::post('storetotal', [PaymentController::class, 'storetotal'])->name('storetotal');
-Route::get('storeCreate', [PaymentController::class, 'storeCreate'])->name('storeCreate');
-
-Route::get('payment/showPdfPayment/{id}', [PaymentController::class, 'showPdfPayment'])->name('showPdfPayment');
-
-Route::get('aprobation/{id}', [PartialController::class, 'aprobation'])->name('aprobation');
-
-Route::get('statuspayment/{id}', [PaymentController::class, 'statuspayment'])->name('statuspayment');
-Route::get('pending', [PaymentDateController::class, 'pending'])->name('pending');
 
 

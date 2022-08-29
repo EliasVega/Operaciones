@@ -18,6 +18,7 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PresuntivePaymentController;
 use App\Http\Controllers\RemissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\UserController;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;

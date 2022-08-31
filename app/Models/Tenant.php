@@ -25,6 +25,7 @@ class Tenant extends BaseTenant
     public function createDatabase($tenant){
 
         DB::connection('tenant')->statement("CREATE DATABASE  {$tenant->database};");
+        DB::connection('tenant')->statement("GRANT ALL PRIVILEGES ON {$tenant->database}.* TO 'emdisoftuser'@'localhost';");
         /*$database_name = parse_url(config('app.url'), PHP_URL_HOST).'_'.$tenant->name;
         $database = Str::of($tenant->database);
         $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA_SCHEMATA WHERE SCHEMA_NAME = ?";

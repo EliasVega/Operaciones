@@ -7,7 +7,7 @@ use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Department;
 use App\Models\Municipality;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -22,10 +22,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
+
             $companies = company::where('id', '=', 1)->get();
-
-
-        return view('admin.company.index', compact('companies'));
+            $comp = count($companies);
+        return view('admin.company.index', compact('companies', 'comp'));
     }
 
     /**

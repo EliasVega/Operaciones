@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->foreignId('company_id')->constrained()->after('id')->onUpdate('cascade');
+            $table->foreignId('company_id')->nullable()->constrained()->after('id');
             $table->foreignId('document_id')->constrained()->after('company_id')->onUpdate('cascade');
             $table->foreignId('role_id')->constrained()->after('document_id')->onUpdate('cascade');
             $table->foreignId('bank_id')->constrained()->after('role_id');

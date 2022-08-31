@@ -74,6 +74,8 @@ if (Tenant::current()) {
     Route::get('inactive', [UserController::class, 'inactive'])->name('inactive');
     Route::get('status/{id}', [UserController::class, 'status'])->name('status');
 
+    Route::get('company/create/{id}', [CompanyController::class, 'getMunicipalities']);
+
     Route::get('remission/showPdfRemission/{id}', [RemissionController::class, 'showPdfRemission'])->name('showPdfRemission');
     Route::get('remission/EntegaPartial/{id}', [RemissionController::class, 'EntregaPartial'])->name('EntregaPartial');
     Route::get('remission/EntegaTotal/{id}', [RemissionController::class, 'EntregaTotal'])->name('EntregaTotal');

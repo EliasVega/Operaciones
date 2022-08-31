@@ -48,6 +48,7 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
+
         $name = $request->name;
         $domain = '.emdisoft.com.co';
         $database = 'emdisoft_' . $name;
